@@ -6,7 +6,7 @@
 /*   By: juvilleg <juvilleg@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:55:38 by juvilleg          #+#    #+#             */
-/*   Updated: 2024/04/18 10:48:43 by juvilleg         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:58:11 by juvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ char	*ft_next(char *buffer)
 		return (NULL);
 	}
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	if (!line)
+	{
+		free(line);
+		return (0);
+	}
 	i++;
 	j = 0;
 	while (buffer[i])
@@ -55,6 +60,11 @@ char	*ft_line(char *buffer)
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	line = ft_calloc(i + 2, sizeof(char));
+	if (!line)
+	{
+		free(line);
+		return (0);
+	}
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -78,12 +88,12 @@ char	*read_file(int fd, char *res)
 	while (byte_read > 0)
 	{
 		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read == -1)
+		if (byte_read < 0)
 		{
 			free(buffer);
 			return (NULL);
 		}
-		buffer[byte_read] = 0;
+		buffer[byte_read] = '\0';
 		res = ft_free(res, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
@@ -98,7 +108,11 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		free(buffer);
+		buffer = NULL;
 		return (NULL);
+	}
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
