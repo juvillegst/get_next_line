@@ -6,7 +6,7 @@
 /*   By: juvilleg <juvilleg@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:01:51 by juvilleg          #+#    #+#             */
-/*   Updated: 2024/04/18 10:49:29 by juvilleg         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:51:11 by juvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		sizetotal;
+	int		bothsize;
 	char	*res;
 	int		i;
 	int		j;
 
 	i = 0;
-	sizetotal = ft_strlen(s1) + ft_strlen(s2);
-	res = malloc(sizeof(char) * (sizetotal + 1));
+	bothsize = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(sizeof(char) * (bothsize + 1));
 	if (!res || !s1 || !s2)
 		return (NULL);
 	while (s1[i] != 0)
@@ -36,18 +36,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 		j++;
 	}
-	res[sizetotal] = 0;
+	res[bothsize] = 0;
 	return (res);
 }
 
-char	*ft_strchr(const char *string, int searchedChar )
+char	*ft_strchr(const char *string, int searchc )
 {
 	char	*str;
 
 	str = (char *)string;
-	while (*str != searchedChar && *str != 0)
+	while (*str != searchc && *str != 0)
 		str++;
-	if (*str == searchedChar)
+	if (*str == searchc)
 		return (str);
 	else
 		return (NULL);
@@ -67,23 +67,23 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+void	*ft_calloc(size_t count, size_t size)
 {
 	char	*res;
 
-	res = malloc(elementSize * elementCount);
+	res = malloc(size * count);
 	if (!res)
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
+	ft_bzero(res, size * count);
 	return (res);
 }
 
-size_t	ft_strlen(const char *theString)
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (theString[i])
+	while (str[i])
 		i++;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: juvilleg <juvilleg@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:55:38 by juvilleg          #+#    #+#             */
-/*   Updated: 2024/04/18 14:58:11 by juvilleg         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:47:19 by juvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,24 @@ char	*ft_line(char *buffer)
 	return (line);
 }
 
-char	*read_file(int fd, char *res)
+char	*ft_read(int fd, char *res)
 {
 	char	*buffer;
-	int		byte_read;
+	int		bytes;
 
 	if (!res)
 		res = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	byte_read = 1;
-	while (byte_read > 0)
+	bytes = 1;
+	while (bytes > 0)
 	{
-		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read < 0)
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes < 0)
 		{
 			free(buffer);
 			return (NULL);
 		}
-		buffer[byte_read] = '\0';
+		buffer[bytes] = '\0';
 		res = ft_free(res, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
-	buffer = read_file(fd, buffer);
+	buffer = ft_read(fd, buffer);
 	if (!buffer)
 		return (NULL);
 	line = ft_line(buffer);
