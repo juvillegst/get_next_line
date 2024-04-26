@@ -6,7 +6,7 @@
 /*   By: juvilleg <juvilleg@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:58:37 by juvilleg          #+#    #+#             */
-/*   Updated: 2024/04/18 10:49:00 by juvilleg         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:28:46 by juvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChar );
+char	*ft_strchr(const char *string, int searchc);
 
 void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
+void	*ft_calloc(size_t count, size_t size);
 
-size_t	ft_strlen(const char *theString);
+size_t	ft_strlen(const char *str);
 
 #endif
